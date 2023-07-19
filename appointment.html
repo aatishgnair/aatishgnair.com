@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Appointment Page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .appointment-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: #fff;
+            border-radius: 8px;
+            margin-top: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .appointment-container h1 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+        .appointment-container p {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="appointment-container">
+        <h1>Book an Appointment</h1>
+        <p>Disclaimer: This appointment is for a free consultation, but it may change to a paid service based on the scope of work. During the meeting, we will discuss how to improve and address any questions you may have. The meeting will be recorded for future reference.</p>
+        <script>
+            function showAppointmentPage() {
+                var confirmation = confirm("By booking this appointment, you agree to the terms and conditions. The meeting will be recorded. Do you agree?");
+                if (confirmation === true) {
+                    var appointmentWidget = document.createElement("div");
+                    appointmentWidget.classList.add("calendly-inline-widget");
+                    appointmentWidget.setAttribute("data-url", "https://calendly.com/aatishgnair/30min");
+                    appointmentWidget.style.minWidth = "320px";
+                    appointmentWidget.style.height = "700px";
+                    document.body.appendChild(appointmentWidget);
+
+                    var script = document.createElement("script");
+                    script.type = "text/javascript";
+                    script.src = "https://assets.calendly.com/assets/external/widget.js";
+                    script.async = true;
+                    document.body.appendChild(script);
+                } else {
+                    // Redirect or display an error message if the user doesn't agree
+                    alert("You must agree to the terms and conditions to proceed.");
+                    window.location.href = "/"; // Redirect to homepage
+                }
+            }
+            showAppointmentPage();
+        </script>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
