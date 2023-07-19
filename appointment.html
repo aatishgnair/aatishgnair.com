@@ -25,56 +25,19 @@
             margin-bottom: 1rem;
         }
     </style>
+     <!-- Favicons -->
+  <link href="assets/img/IMG_20230101_085940718_processed[1022].jpg" rel="icon">
+  <link href="assets/img/IMG_20230101_085940718_processed[1022].jpg" rel="apple-touch-icon">
+
 </head>
 <body>
     <div class="appointment-container">
         <h1>Book an Appointment</h1>
         <p>Disclaimer: This appointment is for a free consultation, but it may change to a paid service based on the scope of work. During the meeting, we will discuss how to improve and address any questions you may have. The meeting will be recorded for future reference.</p>
-
-        <!-- Modal -->
-        <div class="modal fade" id="agreementModal" tabindex="-1" aria-labelledby="agreementModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="agreementModalLabel">Terms and Conditions</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p>By booking this appointment, you agree to the following terms and conditions:</p>
-                        <ul>
-                            <li>The meeting will be recorded for future reference.</li>
-                            <li>This appointment is for a free consultation, but it may change to a paid service based on the scope of work.</li>
-                            <li>We will discuss how to improve and address any questions you may have.</li>
-                        </ul>
-                    </div>
-                    <div class="modal-footer">
-                        <input class="form-check-input me-2" type="checkbox" value="" id="agreeCheckbox">
-                        <label class="form-check-label" for="agreeCheckbox">
-                            I agree to the terms and conditions
-                        </label>
-                        <button type="button" class="btn btn-primary" id="proceedButton" disabled>Proceed</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <script>
-            var proceedButton = document.getElementById("proceedButton");
-            var agreeCheckbox = document.getElementById("agreeCheckbox");
-
-            agreeCheckbox.addEventListener("change", function () {
-                proceedButton.disabled = !this.checked;
-            });
-
             function showAppointmentPage() {
-                var agreementModal = new bootstrap.Modal(document.getElementById("agreementModal"), {
-                    backdrop: "static",
-                    keyboard: false
-                });
-                agreementModal.show();
-
-                proceedButton.addEventListener("click", function () {
-                    document.getElementById("agreementModal").style.display = "none";
+                var confirmation = confirm("By booking this appointment, you agree to the terms and conditions. The meeting will be recorded. Do you agree?");
+                if (confirmation === true) {
                     var appointmentWidget = document.createElement("div");
                     appointmentWidget.classList.add("calendly-inline-widget");
                     appointmentWidget.setAttribute("data-url", "https://calendly.com/aatishgnair/30min");
@@ -87,7 +50,11 @@
                     script.src = "https://assets.calendly.com/assets/external/widget.js";
                     script.async = true;
                     document.body.appendChild(script);
-                });
+                } else {
+                    // Redirect or display an error message if the user doesn't agree
+                    alert("You must agree to the terms and conditions to proceed.");
+                    window.location.href = "/"; // Redirect to homepage
+                }
             }
             showAppointmentPage();
         </script>
