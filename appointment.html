@@ -74,7 +74,19 @@
                 agreementModal.show();
 
                 proceedButton.addEventListener("click", function () {
-                    window.location.href = "/appointment.html"; // Redirect to the appointment page
+                    document.getElementById("agreementModal").style.display = "none";
+                    var appointmentWidget = document.createElement("div");
+                    appointmentWidget.classList.add("calendly-inline-widget");
+                    appointmentWidget.setAttribute("data-url", "https://calendly.com/aatishgnair/30min");
+                    appointmentWidget.style.minWidth = "320px";
+                    appointmentWidget.style.height = "700px";
+                    document.body.appendChild(appointmentWidget);
+
+                    var script = document.createElement("script");
+                    script.type = "text/javascript";
+                    script.src = "https://assets.calendly.com/assets/external/widget.js";
+                    script.async = true;
+                    document.body.appendChild(script);
                 });
             }
             showAppointmentPage();
