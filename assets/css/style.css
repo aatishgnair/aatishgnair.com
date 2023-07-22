@@ -359,6 +359,49 @@ h6 {
   }
 }
 
+/* Style for the .quote class */
+.quote {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  border-radius: 5px;
+}
+
+.quote-text {
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0;
+  padding: 1px;
+}
+
+.quote-author {
+  color: #fff;
+  font-size: 18px;
+  margin: 0;
+  
+  display: block; /* To make the author name take up full width on small screens */
+  text-align: right; /* To align the author name to the right on small screens */
+}
+
+/* Responsive CSS */
+@media (max-width: 768px) {
+  .quote {
+    font-size: 10px; /* Decreased font size for the quote on smaller screens */
+    padding: 5px;
+  }
+
+  .quote-text {
+    font-size: 10px; /* Decreased font size for the quote text on smaller screens */
+  }
+
+  .quote-author {
+    font-size: 16px; /* Decreased font size for the author name on smaller screens */
+  }
+}
+
 /*--------------------------------------------------------------
 # Sections General
 --------------------------------------------------------------*/
@@ -1166,6 +1209,28 @@ section {
   100% {
     transform: rotate(360deg);
   }
+}
+
+/* CSS for the Review Button */
+.review-button {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.btn-review {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #0563bb;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.btn-review:hover {
+  background-color: #034b9b;
 }
 
 /*--------------------------------------------------------------
