@@ -952,7 +952,7 @@ With his dedication, determination, and passion for technology, Aatish is well-e
     </div>
 
     <div class="blog-carousel">
-      <!-- The blog posts will be fetched and added dynamically here -->
+     
     </div>
 
     <div class="view-all-btn">
@@ -961,12 +961,12 @@ With his dedication, determination, and passion for technology, Aatish is well-e
   </div>
 
   <script>
-    // Replace with your Blogger API key
+   
     const apiKey = 'AIzaSyBdC6G8Up0ZC0h1fbUNz3K6Sbvcw_WvKMo';
-    // Replace with your Blogger blog ID
     const blogId = '7606580647722805259';
 
-    const apiUrl = `https://www.googleapis.com/blogger/v3/blogs/${blogId}/posts?key=${apiKey}&fetchBodies=false&maxResults=4`;
+
+    const apiUrl = `https://www.googleapis.com/blogger/v3/blogs/${blogId}/posts?key=${apiKey}&fetchBodies=false&maxResults=4&fetchImages=true`;
 
     fetch(apiUrl)
       .then((response) => {
@@ -983,9 +983,7 @@ With his dedication, determination, and passion for technology, Aatish is well-e
           const postLink = post.url;
           const postTitle = post.title;
           const postExcerpt = post.content ? post.content.split('<p>')[1].split('</p>')[0] : '';
-          const postImageRegex = /<img[^>]+src="([^">]+)"/g;
-          const postImageMatch = post.content ? post.content.match(postImageRegex) : null;
-          const postImage = postImageMatch ? postImageMatch[0].replace('<img src="', '').replace('"', '') : '';
+          const postImage = post.images && post.images.length > 0 ? post.images[0].url : '';
           const postPublishedDate = new Date(post.published);
 
           // Check if the post is one of the two latest and add the "New" label
@@ -1022,7 +1020,8 @@ With his dedication, determination, and passion for technology, Aatish is well-e
       .catch((error) => {
         console.error('Error fetching data:', error);
       });
-  </script>
+</script>
+
 </section>
 <!-- End Latest Blog Posts Section -->
 
