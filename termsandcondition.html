@@ -24,80 +24,7 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
-  <!-- JavaScript to Disable View Page Source -->
-<script>
-    // Override the right-click context menu
-    window.addEventListener('contextmenu', function (e) {
-        e.preventDefault();
-        alert('Viewing page source is disabled.');
-    });
 
-    // Override the Ctrl+U keyboard shortcut (Windows/Linux)
-    window.addEventListener('keydown', function (e) {
-        if ((e.ctrlKey || e.metaKey) && e.key === 'u') {
-            e.preventDefault();
-            alert('Viewing page source is disabled.');
-        }
-    });
-
-    // Override the Ctrl+Shift+I keyboard shortcut (Windows/Linux)
-    window.addEventListener('keydown', function (e) {
-        if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'i') {
-            e.preventDefault();
-            alert('Viewing page source is disabled.');
-        }
-    });
-
-    // Override the F12 keyboard shortcut
-    window.addEventListener('keydown', function (e) {
-        if (e.key === 'F12') {
-            e.preventDefault();
-            alert('Viewing page source is disabled.');
-        }
-    });
-
-</script>
-
-<!-- JavaScript to Disable Right-Click, Keyboard Shortcuts, and Screenshots -->
-<script>
-    // Disable right-click on the page
-    window.addEventListener('contextmenu', function (e) {
-        e.preventDefault();
-    });
-
-    // Disable keyboard shortcuts like Ctrl+C, Ctrl+X, Ctrl+V, F12, and PrintScreen
-    window.addEventListener('keydown', function (e) {
-        if (
-            (e.ctrlKey || e.metaKey) ||  // Ctrl or Command key
-            (e.key === 'F12') ||        // F12 key
-            (e.key === 'PrintScreen')   // PrintScreen key
-        ) {
-            e.preventDefault();
-            alert('Keyboard shortcuts and screenshots are disabled on this page.');
-        }
-    });
-</script>
-<!-- JavaScript to Disable Screenshots on Mobile Devices -->
-<script>
-    // Detect if the page is viewed on a mobile device
-    function isMobileDevice() {
-        return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
-    }
-    // Function to handle screenshot attempts
-    function handleScreenshotAttempt() {
-        alert('Screenshots are disabled on this page for mobile devices.');
-        return false;
-    }
-    // Disable screenshots on mobile devices
-    if (isMobileDevice()) {
-        // Prevent touch events that trigger screenshots
-        window.addEventListener('touchstart', handleScreenshotAttempt, true);
-        window.addEventListener('touchend', handleScreenshotAttempt, true);
-
-        // Prevent gestures that trigger screenshots (on some devices)
-        document.documentElement.addEventListener('gesturestart', handleScreenshotAttempt, true);
-    }
-</script>
 
 
  
@@ -205,6 +132,61 @@
         <p><em>Last updated: 03/10/2023</em></p>
     </div>
 
+  <!-- JavaScript to Disable View Page Source -->
+<!-- JavaScript to Disable Right-Click -->
+<script>
+    // Override the right-click context menu
+    window.addEventListener('contextmenu', function (e) {
+        e.preventDefault();
+        alert('Viewing page source is disabled.');
+    });
+</script>
+
+<!-- JavaScript to Disable Keyboard Shortcuts and Screenshots -->
+<script>
+    // Disable keyboard shortcuts like Ctrl+C, Ctrl+X, Ctrl+V, F12, and PrintScreen
+    window.addEventListener('keydown', function (e) {
+        if (e.ctrlKey || e.metaKey || e.key === 'F12' || e.key === 'PrintScreen') {
+            e.preventDefault();
+            alert('Keyboard shortcuts and screenshots are disabled on this page.');
+        }
+    });
+</script>
+
+<!-- JavaScript to Disable Screenshots on Mobile Devices -->
+<script>
+    // Detect if the page is viewed on a mobile device
+    function isMobileDevice() {
+        return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
+    }
+
+    // Function to handle screenshot attempts
+    function handleScreenshotAttempt(e) {
+        // Alert the user and prevent default behavior
+        alert('Screenshots are disabled on this page for mobile devices.');
+        e.preventDefault();
+        e.stopPropagation();
+    }
+
+    if (isMobileDevice()) {
+        // Prevent touch events that trigger screenshots
+        window.addEventListener('touchstart', function (e) {
+            if (e.touches.length > 1) {
+                handleScreenshotAttempt(e);
+            }
+        }, { passive: false });
+
+        // Allow one-finger scrolling on mobile
+        document.body.style.touchAction = 'pan-y';
+
+        // Detect volume button press (may not work on all devices)
+        window.addEventListener('keydown', function (e) {
+            if (e.key === 'VolumeUp' || e.key === 'VolumeDown') {
+                handleScreenshotAttempt(e);
+            }
+        }, true);
+    }
+</script>
 
 </body>
 
