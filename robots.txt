@@ -1,3 +1,4 @@
 User-agent: *
 Disallow: /notice_web_aatishgnair.com_01.pdf
 Disallow: /section/ads-notice
+Disallow: /testimonials/
